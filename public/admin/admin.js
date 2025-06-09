@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // IMPORTANTE: Substitua pelo IP público da sua VM na Azure
-    const API_URL = 'http://20.226.78.123:3000'; // Exemplo: http://20.226.78.123:3000
+    const API_URL = 'http://20.197.224.54:3000'; // Exemplo: http://20.226.78.123:3000
 
     const socket = io(API_URL);
     let state = { categorias: [], produtos: [], entregadores: [], pedidos: [] };
