@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- URL da sua API na Azure ---
+    // O IP que você forneceu já está configurado.
+    const API_URL = 'http://20.197.224.54:3000';
+
     // --- Referências do DOM ---
     const menuContainer = document.getElementById('menu-container');
     const listaCarrinhoModal = document.getElementById('lista-carrinho-modal');
@@ -25,8 +29,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function carregarCardapio() {
         try {
-            const [categoriasRes, produtosRes] = await Promise.all([ fetch('/api/categorias'), fetch('/api/produtos') ]);
-            if (!categoriasRes.ok || !produtosRes.ok) throw new Error('Falha ao buscar dados do cardápio.');
+            const [categoriasRes, produtosRes] = await Promise.all([ 
+                fetch(`${API_URL}/api/categorias`), 
+                fetch(`${API_URL}/api/produtos`) 
+            ]);
+            if (!categoriasRes.ok || !produtosRes.ok) {
+                throw new Error('Não foi possível carregar o cardápio do servidor.');
+            }
             const categorias = await categoriasRes.json();
             produtosDisponiveis = await produtosRes.json();
             renderizarCardapio(categorias, produtosDisponiveis);
@@ -65,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         return `
             <div class="product-card flex flex-col" data-produto-id="${produto.id}">
-                <div class="overflow-hidden h-56"><img src="${produto.imagem || 'https://placehold.co/600x400/1f2937/f3f4f6?text=Sem+Imagem'}" alt="[Imagem de ${produto.nome}]" class="w-full h-full object-cover"></div>
+                <div class="overflow-hidden h-56"><img src="${API_URL}${produto.imagem}" alt="[Imagem de ${produto.nome}]" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/1f2937/f3f4f6?text=Sem+Imagem'"></div>
                 <div class="p-5 flex flex-col flex-grow">
                     <h3 class="font-playfair text-2xl font-bold text-yellow-400">${produto.nome}</h3>
                     <p class="text-sm text-gray-400 my-2 flex-grow">${produto.descricao}</p>
@@ -169,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const total = carrinho.reduce((acc, item) => acc + item.preco, 0);
 
         try {
-            const res = await fetch('/api/pedidos', {
+            const res = await fetch(`${API_URL}/api/pedidos`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
