@@ -1,0 +1,27 @@
+/* Importação do Tailwind via CDN será feita no HTML, mas este arquivo é para estilos customizados */
+body {
+    background-color: #111827; /* bg-gray-900 */
+    color: #f3f4f6; /* text-gray-100 */
+    font-family: 'Inter', sans-serif; /* Fonte padrão, pode ser importada via Google Fonts no HTML */
+}
+
+/* Estilos para o Painel de Gerenciamento */
+.card {
+    background-color: #1f2937; /* bg-gray-800 */
+    border-radius: 0.75rem; /* rounded-xl */
+    padding: 1.5rem; /* p-6 */
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.status-novo { background-color: #3b82f6; color: white; }
+.status-em-preparo { background-color: #f59e0b; color: white; }
+.status-pronto { background-color: #22c55e; color: white; }
+.status-em-rota { background-color: #8b5cf6; color: white; }
+.status-entregue { background-color: #6b7280; color: white; }
+.status-cancelado { background-color: #ef4444; color: white; }
+
+/* Leaflet Map Height */
+#map {
+    height: 400px;
+    border-radius: 0.5rem;
+}

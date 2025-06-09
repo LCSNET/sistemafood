@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZapFood - Entregador</title>
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../shared/style.css">
+</head>
+<body class="flex items-center justify-center min-h-screen">
+    <div class="card text-center w-full max-w-sm mx-4 p-8">
+        
+        <!-- Tela de Login -->
+        <div id="login-view">
+            <h1 class="text-3xl font-bold text-yellow-400 mb-2">App do Entregador</h1>
+            <p class="text-gray-400 mb-6">Insira seu ID para começar.</p>
+            <form id="login-form">
+                <input type="number" id="delivery-id-input" class="w-full p-3 rounded bg-gray-700 text-center text-xl font-bold mb-4" placeholder="Seu ID de Entregador" required>
+                <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg text-lg">
+                    <i class="fas fa-motorcycle mr-2"></i>INICIAR RASTREAMENTO
+                </button>
+            </form>
+        </div>
+
+        <!-- Tela de Rastreamento Ativo -->
+        <div id="tracking-view" class="hidden">
+            <h1 class="text-3xl font-bold text-yellow-400 mb-2">Entrega em Andamento</h1>
+            <p class="text-gray-400 mb-4">Olá, <span id="delivery-name" class="font-bold">Entregador</span>!</p>
+            <p class="text-lg mb-6">Seu ID é <span id="delivery-id-display" class="font-bold">#0</span>.</p>
+            
+            <div id="tracking-status" class="p-4 rounded-lg bg-green-800 text-white font-bold text-xl mb-6 flex items-center justify-center gap-3">
+                <i class="fas fa-map-marker-alt animate-pulse"></i> RASTREANDO...
+            </div>
+            
+            <p class="text-sm text-gray-500 mb-6">Sua localização está sendo enviada em segundo plano. Você pode fechar esta tela.</p>
+
+            <button id="stop-tracking-btn" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg text-lg">
+                <i class="fas fa-check-circle mr-2"></i>FINALIZAR ENTREGA
+            </button>
+        </div>
+    </div>
+
+    <!-- Socket.IO Client -->
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- Custom JS -->
+    <script src="delivery.js"></script>
+</body>
+</html>

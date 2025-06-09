@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Gerenciamento - Pizzaria</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="../shared/style.css">
+    <style>
+        .view { display: none; }
+        .view.active { display: block; }
+        .nav-link { cursor: pointer; transition: all 0.2s ease-in-out; }
+        .nav-link.active { background-color: #facc15; color: #1f2937; font-weight: bold; }
+        .modal-container { position: fixed; inset: 0; background-color: rgba(0,0,0,0.75); display: flex; align-items: center; justify-content: center; z-index: 50; padding: 1rem; }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+    <header class="mb-6">
+        <h1 class="text-4xl font-bold text-yellow-400">Painel da Pizzaria</h1>
+        <nav class="mt-4 flex flex-wrap space-x-2 border-b-2 border-gray-700">
+            <a class="nav-link py-2 px-4 rounded-t-lg active" data-view="pedidos">Pedidos</a>
+            <a class="nav-link py-2 px-4 rounded-t-lg" data-view="cardapio">Gerenciar Cardápio</a>
+            <a class="nav-link py-2 px-4 rounded-t-lg" data-view="entregadores">Entregadores e Rastreio</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Visão de Pedidos -->
+        <section id="pedidos-view" class="view active">
+            <div id="pedidos-container" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
+        </section>
+
+        <!-- Visão de Gerenciamento de Cardápio -->
+        <section id="cardapio-view" class="view">
+             <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-semibold text-yellow-300">Itens do Cardápio</h2>
+                <div>
+                    <button id="btn-add-categoria" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded mr-2"><i class="fas fa-tags mr-2"></i>Nova Categoria</button>
+                    <button id="btn-add-produto" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"><i class="fas fa-plus mr-2"></i>Novo Produto</button>
+                </div>
+            </div>
+            <div id="cardapio-gerenciamento-container" class="space-y-8"></div>
+        </section>
+
+        <!-- Visão de Entregadores e Rastreamento -->
+        <section id="entregadores-view" class="view">
+             <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-semibold text-yellow-300">Entregadores</h2>
+                <button id="btn-add-entregador" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"><i class="fas fa-user-plus mr-2"></i>Novo Entregador</button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                 <div class="md:col-span-1 space-y-4" id="entregadores-lista"></div>
+                 <div class="md:col-span-2 card" id="map-container" style="height: 60vh; min-height: 400px;"></div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Container para Modais -->
+    <div id="modal-container" class="hidden"></div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

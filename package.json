@@ -1,0 +1,21 @@
+{
+  "name": "pizzaria-sistema-completo",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.2.1",
+    "better-sqlite3": "^9.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "mercadopago": "^1.5.17",
+    "multer": "^1.4.5-lts.1",
+    "qrcode-terminal": "^0.12.0",
+    "socket.io": "^4.7.4",
+    "whatsapp-web.js": "^1.23.0"
+  }
+}
